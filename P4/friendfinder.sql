@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2020 at 12:36 AM
+-- Generation Time: Nov 20, 2020 at 08:53 AM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.3.22
+-- PHP Version: 7.2.33
 
 DROP DATABASE IF EXISTS friendfinder;
 CREATE DATABASE friendfinder;
@@ -57,19 +57,17 @@ CREATE TABLE `posts` (
   `short_title` tinytext NOT NULL,
   `title` text NOT NULL,
   `body` longtext NOT NULL,
-  `UID` int(11) NOT NULL
+  `UID` int(11) NOT NULL,
+  `likes` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`short_title`, `title`, `body`, `UID`) VALUES
-('short title', 'long title', 'body2', 1),
-('new', 'newenw', 'dsdsadas', 1),
-('toilet', 'Is it safe to pour greenbeans in the toilet', 'asking for a friend', 2),
-('test1', 'test2', 'test3', 4),
-('order', 'Big Smokes Order', 'I`ll have two number nines, a number nine large, a number six with extra dip, a number seven, two number forty-fives, one with cheese, and a large soda.', 2);
+INSERT INTO `posts` (`short_title`, `title`, `body`, `UID`, `likes`) VALUES
+('toilet', 'Is it safe to pour greenbeans in the toilet', 'asking for a friend', 2, 0),
+('order', 'Big Smokes Order', 'I`ll have two number nines, a number nine large, a number six with extra dip, a number seven, two number forty-fives, one with cheese, and a large soda.', 2, 0);
 
 -- --------------------------------------------------------
 

@@ -4,15 +4,6 @@ include("db.php");
 ensure_logged_in();
 include("top.php"); ?>
 
-<style>
-.indent{
-  margin-left: 20px;
-  width: 400px;
-  word-wrap: break-word;
-  background-color: aliceblue;
-}
-</style>
-
 <h2>Would you like to look up a specific post?</h2>
 <form id="view_post" action="viewpost.php" method="get">
     <fieldset>
@@ -29,9 +20,9 @@ include("top.php"); ?>
   foreach (get_post($stitle) as $row) { ?>
       <div class="indent">
           <h2 id="read"><?= $row["title"] ?><br></h2>
-          <?= get_username_from_id($row["UID"]);?><br>
-          Short title: <?= $row["short_title"] ?><br>
-          <?= $row["body"] ?><br>
+          <h3 id="read"><?= get_username_from_id($row["UID"]);?></h3>
+          <h4 id="body">Short title: <?= $row["short_title"] ?></h4>
+          <p id="body"><?= $row["body"] ?></p><br>
       </div>
   <?php } ?>
 

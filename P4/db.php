@@ -63,10 +63,62 @@ function post_post($stitle, $title, $body) { //done do not touch
   }
 }
 
+    //get uid of current user
+function get_UID($uname1) {
+  $db = mysqli_connect("localhost", "root", "", "friendfinder");
+  $idquery = "SELECT UID FROM users WHERE name = '$uname1'";
+  $idquery1 = mysqli_query($db, $idquery);
+  $array = array();
+
+  while ($row = mysqli_fetch_assoc($idquery1)) {
+      array_push($array, $row['UID']);
+  }
+  $userid = $array[0];
+  return $userid;
+}
+
+function get_num_posts($id) {
+  //get posts made by this user
+  $countposts = get_posts_id($id);
+  //echo "debug";
+  //var_dump($countposts);
+  $array2 = array();
+  while ($row2 = mysqli_fetch_assoc($countposts)) {
+      //echo "debug ";
+      //var_dump($row2);
+      //echo $row2[1];
+      array_push($array2, $row2['short_title']);
+  }
+  $numPosts = sizeof($array2);
+  return $numPosts;
+  //echo "debug 40 - ";
+}
+
+function get_username_from_id($uid){
+  $db = mysqli_connect("localhost", "root", "", "friendfinder");
+  $namequery = "SELECT name FROM users WHERE UID = '$uid'";
+  $runquery = mysqli_query($db, $namequery);
+  $array = array();
+  while ($row = mysqli_fetch_assoc($runquery)) {
+    array_push($array, $row['name']);
+  }
+  return $array[0];
+}
+
 function get_posts() {
   $db = mysqli_connect("localhost", "root", "", "friendfinder");
   // $query = "SELECT * FROM posts";
   return $db->query("SELECT * FROM posts");
+}
+
+function get_num_likes($stitle){
+  $db = mysqli_connect("localhost", "root", "", "friendfinder");
+  $query = "SELECT likes FROM posts WHERE short_title = '{$stitle}'";
+  $q = mysqli_query($db, $query);
+  while ($row = mysqli_fetch_assoc($q)) {
+    $num = $row["likes"];
+  return $num;
+}
 }
 
 function get_posts_id($id) {
@@ -85,6 +137,48 @@ function get_post($stitle) { //ryan was here
   $db = mysqli_connect("localhost", "root", "", "friendfinder");
   // $query = "SELECT * FROM posts";
   return $db->query("SELECT * FROM posts WHERE short_title = '{$stitle}'");
+}
+
+function get_friends($uid) { //no this function does not give you friends
+  $db = mysqli_connect("localhost", "root", "", "friendfinder");
+  //we know $userid is the id of the current user
+  //we first need a query to get the id nums of all of our current user's friends
+  $friendquery1 = "SELECT uid2 FROM friend WHERE uid1 = '$uid'";
+  $friendquery2 = "SELECT uid1 FROM friend WHERE uid2 = '$uid'";
+  //this is done twice because of how table friend is set up
+  $fq1 = mysqli_query($db, $friendquery1);
+  $fq2 = mysqli_query($db, $friendquery2);
+
+  //write a for loop; for each item in fq1 and fq2, put the uid into an array
+  $array3 = array();
+  while ($row = mysqli_fetch_assoc($fq1)) {
+      array_push($array3, $row['uid2']);
+  }
+  while ($row = mysqli_fetch_assoc($fq2)) {
+      array_push($array3, $row['uid1']);
+  }
+  //var_dump($array3);
+  //write a for loop; for each item in array3, run a query to get the name of the user; put usernames into an array
+  $array4 = array();
+  for ($i = 0; $i < sizeof($array3); $i++){
+      $uid = $array3[$i];
+      $namequery = "SELECT name FROM users WHERE UID = '$uid'";
+      $nq = mysqli_query($db, $namequery);
+      while ($row = mysqli_fetch_assoc($nq)) {
+          array_push($array4, $row['name']);
+      }
+  }
+
+  return $array4;
+    //var_dump($array4);
+    //we now have an array ($array4) full of the names of our friends
+    //now we list them out in a nice and neat fashing.
+}
+
+function add_like($stitle) {
+  $db = mysqli_connect("localhost", "root", "", "friendfinder");
+  $db->query("UPDATE posts SET likes = likes+1 WHERE short_title = '$stitle'");
+  redirect ("viewposts.php", "post liked!");
 }
 
 function update_title($stitle, $title) {
@@ -133,16 +227,5 @@ function redirect($url, $flash_message = NULL) {
   # session_write_close();
   header("Location: $url");
   die;
-}
-
-function get_username_from_id($uid){
-  $db = mysqli_connect("localhost", "root", "", "friendfinder");
-  $namequery = "SELECT name FROM users WHERE UID = '$uid'";
-  $runquery = mysqli_query($db, $namequery);
-  $array = array();
-  while ($row = mysqli_fetch_assoc($runquery)) {
-    array_push($array, $row['name']);
-  }
-  echo $array[0];
 }
 ?>

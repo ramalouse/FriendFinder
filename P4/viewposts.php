@@ -1,19 +1,9 @@
 <?php
-
 include("db.php");
 ensure_logged_in();
-include("top.php"); ?>
+include("top.php"); 
+?>
 
-<style>
-.indent{
-  margin-left: 20px;
-  width: 400px;
-  word-wrap: break-word;
-  border: solid white 1px;
-  margin: 3px;
-  background-color: aliceblue;
-}
-</style>
 
 <h2>Would you like to look up a specific post?</h2>
 <form id="view_post" action="viewpost.php" method="get">
@@ -31,10 +21,20 @@ include("top.php"); ?>
   foreach (get_posts() as $row) { ?>
   <div class="indent">
     <h2 id="read"><?= $row["title"] ?><br></h2>
-    <?= get_username_from_id($row["UID"]);?><br>
-
-    <?= $row["body"] ?><br>
+    <div id="small">
+      <img src='head_pumpkin.png' />
+      <h3 id="name"><?= get_username_from_id($row["UID"]);?></h3>
+    </div>
+    <p id="body"><?= $row["body"] ?></p><br>
+    
+    <h2 id="like"><?php echo(get_num_likes($row["short_title"])) ?> likes</h2>
+    <form method="post" action="likepost.php">
+      <input type="hidden" name="short_title" value="<?php echo htmlspecialchars($row["short_title"]); ?>">
+      <input type="submit" name="test" class="test" value="Like" id="like" /><br/>
+    </form>
   </div>
-  <?php } ?>
+  
+  <?php } 
+  ?>
 
 <?php include("bottom.php"); ?>

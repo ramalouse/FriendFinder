@@ -2,11 +2,11 @@
 <html>
   <head>
     <title>Friend Finder - FIND FRIENDS HERE IN YOUR AREA</title>
-    <link href="format.css" type="text/css" rel="stylesheet" />
+    <link href="format.css?<?=filemtime("format.css")?>" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <h1><img src="logo.png"></img></h1>
+    <h1><img id="logo" src="logo.png"/></h1>
   
     <ul id="navigation">
       <li><a href="index.php">Main Page</a></li>

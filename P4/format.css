@@ -15,6 +15,22 @@ h1, #navigation, #flash {
   text-align: center;
 }
 
+img#logo {
+  max-height: 100%;
+  max-width: 100%;
+  float: none;
+}
+
+img {
+  max-width:40px;
+  max-height:40px;
+  float:left;
+}
+
+#name {
+  color: black;
+}
+
 #flash {
   background-color: #ffffcc;
   border: 1px dotted #ccccaa;
@@ -55,12 +71,29 @@ input #short_title{
   align-content: center;
 }
 
+#body {
+  color: black;
+  margin-top: 40px;
+  margin-left: 20px;
+  clear: both;
+}
+
+#like {
+  color:blue;
+  margin: 20px;
+}
+
+#small {
+  margin-left: 20px;
+}
+
 .indent {
-  color: #b8471b;
-  background-color: black;
-  margin: 3px;
-  padding: 3px;
+  margin-left: 20px;
+  width: 400px;
+  word-wrap: break-word;
   border: solid white 1px;
+  margin: 3px;
+  background-color: aliceblue;
 }
 
 #rightcolumn{

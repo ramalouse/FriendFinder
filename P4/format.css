@@ -1,0 +1,96 @@
+
+#navigation li {
+  display: inline;
+  padding: 0.5em;
+  background-color: #3c3c3c;
+  border: 3px outset #b8471b;
+  margin: 1em 1em 2em 1em;
+}
+
+a{
+  color: white;
+}
+
+h1, #navigation, #flash {
+  text-align: center;
+}
+
+#flash {
+  background-color: #ffffcc;
+  border: 1px dotted #ccccaa;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+h1, h2, h3, h4 {
+  margin: 0.5em;
+  color: white;
+}
+
+p, dt, dl, ul, li{
+  color: white;
+}
+
+html{
+  background-color: black;
+  font-family: "Applied Sans Pro Bold", sans-serif;
+}
+
+#tiny{
+  font-size: 10pt;
+  text-align: center;
+}
+
+#robco, #ryanco{
+  display: block;
+  text-align: center;
+}
+
+#read{
+  color: #b8471b;
+}
+
+input #short_title{
+  text-align:center;
+  align-content: center;
+}
+
+.indent {
+  color: #b8471b;
+  background-color: black;
+  margin: 3px;
+  padding: 3px;
+  border: solid white 1px;
+}
+
+#rightcolumn{
+  color: white;
+  width: 50%;
+  display: block;
+  alignment: right;
+  float: right;
+}
+
+#leftcolumn{
+  width: 50%;
+  display: block;
+  alignment: left;
+  float: left;
+}
+
+#friendlist{
+  color: white;
+}
+
+.whitetext{
+  color: white;
+}
+footer{
+  float: left;
+  display: block;
+}
+footer p{
+  color: white;
+  text-align: center;
+}
+
